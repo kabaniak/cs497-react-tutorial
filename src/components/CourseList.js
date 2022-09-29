@@ -1,11 +1,13 @@
+import Course from "./Course";
+
 const CourseList = ({ courses }) => {
     const termCourses = Object.values(courses)
 
     return (
-        <div>
+        <div className="course-list">
             {
                 termCourses.map(course =>
-                    <p>{course.term} CS {course.number}: {course.title}</p>
+                    <Course course={course} />
                 )
             }
         </div>
