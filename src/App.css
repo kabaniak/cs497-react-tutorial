@@ -9,7 +9,7 @@
 .course-list {
   display: flex;
   flex-wrap: wrap;
-  width: 85%;
+  width: 1000px;
   grid-template-columns: repeat(auto-fill, minmax(12rem, 17rem));
 }
 
@@ -25,4 +25,12 @@
 
 .topSection {
   height: 60%;
+}
+
+#term-btns {
+  width: 400px;
+}
+
+#term-btns > label {
+  width: 33%;
 }
