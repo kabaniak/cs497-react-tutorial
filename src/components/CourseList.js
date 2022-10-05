@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Course from "./Course";
+import ScheduleModal from './Modal';
+import Cart from './Cart';
 
 const terms = { F: 'Fall', W: 'Winter', S: 'Spring' };
 
@@ -7,12 +9,20 @@ const CourseList = ({ courses }) => {
     const [term, setTerm] = useState('Fall');
     const [selected, setSelected] = useState([]);
     const termCourses = Object.values(courses).filter(course => term === course.term);
+    const [open, setOpen] = useState(false);
 
-    console.log(termCourses)
+    const openModal = () => setOpen(true);
+    const closeModal = () => setOpen(false);
 
     return (
         <>
-            <TermSelector term={term} setTerm={setTerm} />
+            <div className="controls">
+                <TermSelector term={term} setTerm={setTerm} />
+                <button className="btn btn-primary" onClick={openModal}>Show Schedule</button>
+            </div>
+            <ScheduleModal open={open} close={closeModal}>
+                <Cart selected={selected} />
+            </ScheduleModal>
             <div className="course-list">
                 {
                     termCourses.map(course =>

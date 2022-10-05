@@ -27,10 +27,21 @@
   height: 60%;
 }
 
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  padding-bottom: 16px;
+}
+
 #term-btns {
   width: 400px;
 }
 
 #term-btns > label {
   width: 33%;
+}
+
+#schedule {
+  height: 44px;
 }
