@@ -1,13 +1,16 @@
+import { hasConflict } from '../utilities/time.js';
+
 const Course = ({ course, selected, setSelected }) => {
   const isSelected = selected.includes(course);
+  const isDisabled = !isSelected && hasConflict(course, selected);
   const style = {
-    backgroundColor:  isSelected ? 'lightgreen' : 'white'
+    backgroundColor:  isDisabled? 'lightgrey' : isSelected ? 'lightgreen' : 'white'
   };
 
   return (
     <div className="card m-1 p-2"
       style={style}
-      onClick={() => setSelected(toggle(course, selected))}
+      onClick={() => isDisabled ? console.log("Select disabled") : setSelected(toggle(course, selected))}
     >
       <div className="card-body">
         <div className="topSection">
