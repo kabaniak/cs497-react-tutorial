@@ -6,6 +6,7 @@ import Cart from './Cart';
 const terms = { F: 'Fall', W: 'Winter', S: 'Spring' };
 
 const CourseList = ({ courses }) => {
+
     const [term, setTerm] = useState('Fall');
     const [selected, setSelected] = useState([]);
     const termCourses = Object.values(courses).filter(course => term === course.term);
@@ -25,7 +26,7 @@ const CourseList = ({ courses }) => {
             </ScheduleModal>
             <div className="course-list">
                 {
-                    termCourses.map(course =>
+                    termCourses.map((course) => 
                         <Course key={course.term + " " + course.number} course={course}
                             selected={selected} setSelected={setSelected} />
                     )

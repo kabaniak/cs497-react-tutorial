@@ -1,4 +1,5 @@
 import { hasConflict } from '../utilities/time.js';
+import { Link } from 'react-router-dom';
 
 const Course = ({ course, selected, setSelected }) => {
   const isSelected = selected.includes(course);
@@ -7,6 +8,8 @@ const Course = ({ course, selected, setSelected }) => {
     backgroundColor:  isDisabled? 'lightgrey' : isSelected ? 'lightgreen' : 'white'
   };
 
+  const id = course.term[0] + course.number;
+  
   return (
     <div className="card m-1 p-2"
       style={style}
@@ -19,6 +22,7 @@ const Course = ({ course, selected, setSelected }) => {
         </div>
         <hr></hr>
         <div className="card-text">{course.meets}</div>
+        <p><Link to={`/edit/${id}`}>Edit Course</Link></p>
       </div>
     </div>
   );
