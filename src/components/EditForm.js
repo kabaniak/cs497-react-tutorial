@@ -1,5 +1,5 @@
 import { useFormData } from '../utilities/formdata';
-
+import { useDbUpdate } from '../utilities/firebase';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const validateUserData = (key, val) => {
@@ -26,17 +26,23 @@ const ButtonBar = ({ message, disabled }) => {
     return (
         <div className="d-flex">
             <button type="button" className="btn btn-outline-dark me-2" onClick={() => navigate(-1)}>Cancel</button>
+            <button type="submit" className="btn btn-outline-dark me-auto" disabled={disabled}>Submit</button>
+            <span className="p-2">{message}</span>
         </div>
     );
 };
 
 const EditForm = ({ courses }) => {
+    const navigate = useNavigate();
     const { id } = useParams();
+    const [update, result] = useDbUpdate(`/courses/${id}`);
     const [state, change] = useFormData(validateUserData, courses[id]);
     const submit = (evt) => {
         evt.preventDefault();
         if (!state.errors) {
             console.log("Valid");
+            update(state.values);
+            navigate(-1);
         }
     };
 
@@ -44,7 +50,7 @@ const EditForm = ({ courses }) => {
         <form onSubmit={submit} noValidate className={state.errors ? 'was-validated' : null}>
             <InputField name="title" text="Course Title" state={state} change={change} />
             <InputField name="meets" text="Meeting Times" state={state} change={change} />
-            <ButtonBar />
+            <ButtonBar message={result?.message}/>
         </form>
     )
 };
