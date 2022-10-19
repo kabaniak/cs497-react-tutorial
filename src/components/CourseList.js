@@ -5,7 +5,7 @@ import Cart from './Cart';
 
 const terms = { F: 'Fall', W: 'Winter', S: 'Spring' };
 
-const CourseList = ({ courses }) => {
+const CourseList = ({ courses, profile}) => {
 
     const [term, setTerm] = useState('Fall');
     const [selected, setSelected] = useState([]);
@@ -28,7 +28,7 @@ const CourseList = ({ courses }) => {
                 {
                     termCourses.map((course) => 
                         <Course key={course.term + " " + course.number} course={course}
-                            selected={selected} setSelected={setSelected} />
+                            selected={selected} setSelected={setSelected} profile={profile}/>
                     )
                 }
             </div>

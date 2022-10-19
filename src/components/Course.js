@@ -1,15 +1,15 @@
 import { hasConflict } from '../utilities/time.js';
 import { Link } from 'react-router-dom';
 
-const Course = ({ course, selected, setSelected }) => {
+const Course = ({ course, selected, setSelected, profile }) => {
   const isSelected = selected.includes(course);
   const isDisabled = !isSelected && hasConflict(course, selected);
   const style = {
-    backgroundColor:  isDisabled? 'lightgrey' : isSelected ? 'lightgreen' : 'white'
+    backgroundColor: isDisabled ? 'lightgrey' : isSelected ? 'lightgreen' : 'white'
   };
 
   const id = course.term[0] + course.number;
-  
+
   return (
     <div className="card m-1 p-2"
       style={style}
@@ -22,7 +22,9 @@ const Course = ({ course, selected, setSelected }) => {
         </div>
         <hr></hr>
         <div className="card-text">{course.meets}</div>
-        <p><Link to={`/edit/${id}`}>Edit Course</Link></p>
+        {profile?.isAdmin &&
+          <p><Link to={`/edit/${id}`}>Edit Course</Link></p>
+        }
       </div>
     </div>
   );

@@ -32,7 +32,7 @@ const ButtonBar = ({ message, disabled }) => {
     );
 };
 
-const EditForm = ({ courses }) => {
+const EditForm = ({ courses}) => {
     const navigate = useNavigate();
     const { id } = useParams();
     const [update, result] = useDbUpdate(`/courses/${id}`);
