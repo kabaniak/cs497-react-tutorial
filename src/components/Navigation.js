@@ -1,15 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { signInWithGoogle, signOut, useAuthState } from '../utilities/firebase';
 
-const Banner = ({ title }) => {
-  return (
-    <nav className="d-flex">
-      <h1>{title}</h1>
-      <AuthButton />
-    </nav>
-  );
-};
-
 const SignInButton = () => (
   <button className="ms-auto btn btn-dark" onClick={signInWithGoogle}>Sign in</button>
 );
@@ -23,6 +14,14 @@ const AuthButton = () => {
   return user ? <SignOutButton /> : <SignInButton />;
 };
 
-const activation = ({ isActive }) => isActive ? 'active' : 'inactive';
+const activation = ({isActive}) => isActive ? 'active' : 'inactive';
 
-export default Banner;
+const Navigation = () => (
+  <nav className="d-flex">
+    <NavLink to="/" className={activation} end>Posts</NavLink>
+    <NavLink to="/users" className={activation} end>Users</NavLink>
+    <AuthButton />
+  </nav>
+);
+
+export default Navigation;
